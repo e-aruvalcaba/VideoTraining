@@ -1,0 +1,85 @@
+/* Reset Initial Styles */
+
+html {
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+}
+
+.reset {
+    margin: 0%;
+    padding: 0%;
+}
+
+.mainContainer {
+    /* Reset paddings */
+    margin: 0%;
+    padding: 0%;
+}
+.barra {
+    background: rgba(0, 0, 0, .75)!important;
+    height: 10vh;
+}
+
+.barraLateral {
+    height: 91vh;
+    padding-bottom: 56px;
+    float: right;
+    background: rgba(0, 0, 0, .75)!important;
+    padding: 10px;
+    color: white!important;
+    /* background: rgba(0, 0, 0, .75); */
+}
+.controls {
+    margin-left: 5px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.aloneControl{
+    color: #F6CE3E;
+}
+#progressBar {
+    border: 1px solid #aaa;
+    color: #fff;
+}
+#progress {
+    background-color: #F6CE3E;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+.controlsContent {
+    background-color: #F6CE3E;
+    border-radius: 30px;
+    padding: 5px;
+    /* width: 23%; */
+}
+.menu{
+    position: absolute; z-index: 2; width: 400px;   display: none;
+}
+.menu-open{
+    display: block;
+}
+.barraLateral-open{
+    display: block;
+}
+.oculto{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    /* Ocultar Mensajes y subtitulos si se colapsa  */
+    .menuIconContainer{
+        margin-left: 5%;
+    }
+    .progressContainer{
+        margin-right: 6%;    
+    }
+    .menu{
+        width: 100%;
+    }
+}
