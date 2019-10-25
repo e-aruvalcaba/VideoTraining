@@ -15,7 +15,8 @@
     <!-- Comienzan Scripts -->
     <script src="js/jquery-3.4.1.min.js"></script> <!-- Jquery -->
     <script src="js/bootstrap.min.js"></script> <!-- Librerias Bootstrap -->
-    <!-- <script src="js/sweetalert2.all.min.js"></script> --> <!-- Sweet Alert 2 -->
+    <!-- <script src="js/sweetalert2.all.min.js"></script> -->
+    <!-- Sweet Alert 2 -->
     <script src="js/CSSPlugin.min.js"></script> <!-- Plugin Greensock CSS -->
     <script src="js/TweenLite.min.js"></script><!-- Librerias Greensock -->
 </head>
@@ -70,72 +71,89 @@
         </div>Termina Barra Superior -->
 
         <!-- Contenedor del video y de la barra lateral  -->
-        <div id="contentContainer" class="container-fluid" style="background: url('assets/img/fondo.jpg'), no-repeat, center, center, fixed!important;
+        <div id="contentContainer" class="container-fluid"
+            style="background: url('assets/img/fondo.jpg'), no-repeat, center, center, fixed!important;
                                                                 -webkit-background-size: cover!important;
                                                                     -moz-background-size: cover!important;
                                                                     -o-background-size: cover!important;
                                                                     background-size: cover!important; overflow: hidden;">
             <div class="row">
                 <div class="col-12">
-                    <div class="row">
-                        <div id="menu" class="menu barraLateral">
-                            Menu
+                    <div id="menu" class="menu barraLateral container" style="left: 0px;opacity: 1;">
+                        <div id="menuTitle" class="menuTitle" style="text-align: center;">
+                            <p class="reset" style="font-weight: bold;">Menú</p> 
+                            <div class="d-flex justify-content-around">
+                                    <p class="reset">Avance:</p>
+                                    <div class="progress my-auto" style="width: 70%; height: 12px; pointer-events: none;">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 25%; color:black" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
+                                    <!-- <p class="reset"> 35 %</p> -->
+                            </div>
                         </div>
-                        <video id="video"
-                            class="embed-responsive embed-responsive-21by9 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-                            src="video/video1.mp4" style="height: 100vh; padding-bottom: 61px;" controls>
-                        </video>
-                        <div id="barraLateral" class="col-md-3 col-lg-3 col-xl-3 barraLateral oculto " >
-                            Esto es la informacion de la barra lateral
+                        <div id="temasContainer" class="temasContainer">
+                            <!-- INICIA CLONACION DE TEMAS DESDE VARIABLE JSON  -->
                         </div>
-                    </div> <!-- Termina 2nda row -->
-                </div> <!-- Termina col 12 -->
-            </div> <!-- Termina row 1 -->
-        </div> <!-- Termina Contenedor del Contenido Principal -->
+                        <!-- <div id="barraInternaMenu" class="d-flex justify-content-center">
+                            <!-- <i class="fas fa-percent"></i> -->
+                        </div> -->
+                    </div> <!-- Termina MENU -->
+                    <video id="video" class="embed-responsive-21by9 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+                        src="video/video1.mp4" style="height: 100vh; padding-bottom: 61px;" controls
+                        style="display: inline-block!important;">
+                    </video> <!-- Termina VIDEO -->
+                    <!-- comienza barra lateral -->
+                    <div id="barraLateral" class="col-md-3 col-lg-3 col-xl-3 barraLateral oculto bLateralHandler" style="right: -15px; z-index: 999; position:absolute">
+                        <!-- LOGO -->
+                        <div id="LogoBarraLateral " class="col-12 d-flex justify-content-center">
+                             <img src="assets/img/NEORIS.png" class="LogoBarraLateral">  
+                        </div>
+                        <div id="barraLateralDescriptionTema" class="col-12 d-flex justify-content-center barraLateralDescription">
+                            <p class="reset" style="font-weight: bold;">Tema 1: Reconocimiento Interior</p>
+                        </div>    
+                        <div id="barraLateralDescription" class="col-12 d-flex barraLateralDescription">
+                            <p class="reset"> Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. </p>
+                        </div>
+                        <!-- Esto es la informacion de la barra lateral -->
+                    </div> <!-- Termina BARRA LATERAL -->
+                </div> <!-- Termina 2nda row -->
+            </div> <!-- Termina col 12 -->
+        </div> <!-- Termina row 1 -->
+    </div> <!-- Termina Contenedor del Contenido Principal -->
 
-
-
-        <!-- Barra Inferior -->
-
-        <!-- <div class="col-12"> -->
-        <nav class="navbar fixed-bottom navbar-dark bg-dark barra row d-flex justify-content-space-around"
-            style="padding-left: 0%!important; padding-right: 0%!important;">
-            <div class="col-1 col-md-1 menuIconContainer">
-                <div class="row d-flex justify-content-center">
-                    <i class="fas fa-bars controls aloneControl" onclick="llamarMenu();"></i>
+    <!-- Barra Inferior -->
+    <nav class="navbar fixed-bottom navbar-dark bg-dark barra row d-flex justify-content-space-around"
+        style="padding-left: 0%!important; padding-right: 0%!important;">
+        <div class="col-1 col-md-1 menuIconContainer">
+            <div class="row d-flex justify-content-center">
+                <i class="fas fa-bars controls aloneControl" onclick="llamarMenu();"></i>
+            </div>
+        </div>
+        <div class="col-md-2 subtitleContainer d-none d-md-block">
+            <div class="row d-flex justify-content-space-around">
+                <div class="col-4">
+                    <i class="fas fa-comment-dots controls aloneControl" onclick="alert('Mensajes');"></i>
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-closed-captioning controls aloneControl" onclick="alert('subtitles');"></i>
                 </div>
             </div>
-            <div class="col-md-2 subtitleContainer d-none d-md-block">
-                <div class="row d-flex justify-content-space-around">
-                    <div class="col-4">
-                        <i class="fas fa-comment-dots controls aloneControl" onclick="alert('Mensajes');"></i>
-                    </div>
-                    <div class="col-4">
-                        <i class="fas fa-closed-captioning controls aloneControl" onclick="alert('subtitles');"></i>
-                    </div>
-                </div>
+        </div>
+        <div class="col-auto col-sm-3 col-md-4 d-flex justify-content-center">
+            <div class="controlsContent d-flex justify-content-space-evenly">
+                <i class="fas fa-step-backward controls" onclick="alert('atras');"></i>
+                <i style="margin-left: 20px; margin-right: 20px;" class="fas fa-play-circle controls" id="playpause"></i>
+                <i class="fas fa-step-forward controls" onclick="alert('adelante');"></i>
             </div>
-            <div class="col-auto col-sm-3 col-md-4 d-flex justify-content-center">
-                <div class="controlsContent d-flex justify-content-space-evenly">
-                    <i class="fas fa-step-backward controls" onclick="alert('atras');"></i>
-                    <i class="fas fa-play-circle controls" id="playpause"></i>
-                    <i class="fas fa-step-forward controls" onclick="alert('adelante');"></i>
-                </div>
+        </div>
+        <div class="col-auto col-sm-6 col-md-4 progressContainer">
+            <div class="row d-flex justify-content-space-around">
+                <input type="range" class="col-12 col-md-9 reset my-auto" min="0" max="100" id="progress"
+                    onchange="progressChange(this.value)" value="0" style="padding: 0; width: 90%;">
+                <i id="btnBarraLateral" class="fas fa-info-circle controls aloneControl col-md-2 d-none d-md-block"
+                    onclick="llamarBarraLateral();" style="width:10%"></i>
             </div>
-
-            <div class="col-auto col-sm-6 col-md-4 progressContainer">
-                <div class="row d-flex justify-content-space-around">
-                    <input type="range" class="col-12 col-md-9 reset my-auto" min="0" max="100" id="progress"
-                        onchange="progressChange(this.value)" value="0" style="padding: 0; width: 90%;">
-                    <i id="btnBarraLateral" class="fas fa-info-circle controls aloneControl col-md-2 d-none d-md-block"
-                        onclick="llamarBarraLateral();" style="width:10%"></i>
-                </div>
-            </div>
-
-
-        </nav>
-    </div>
+        </div> 
+    </nav> <!-- Termina Barra Inferiro fuera del contetnedor principal -->
     <script src="js/start.js"></script> <!-- Libreria Principal API -->
 </body> <!-- Termina Body -->
-
 </html> <!-- Termina HTML -->

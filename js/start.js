@@ -1,38 +1,18 @@
+var datos = $.parseJSON('{"Modulos":[{"Num":1,"Nombre":"Nombre de Modulo 1","Temas":["Tema 1","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3"],"Rutas":["video/video1","video/video2","video/video3"]},{"Num":2,"Nombre":"Nombre de Modulo 2","Temas":["Tema 4","Tema 5","Tema 6"],"Rutas":["video/video4","video/video5","video/video6"]},{"Num":3,"Nombre":"Nombre de Modulo 3","Temas":["Tema 7","Tema 8","Tema 9"],"Rutas":["video/video7","video/video8","video/video9"]}],"NombreCurso":"Video Training Development","Trak":[],"Ultimo":0,"Libre":false}');
+var playpause = document.getElementById("playpause");
 var menu_open = false;
+var NombreCurso = datos.NombreCurso;
 var bussy = false;
 var barraLateralOpen = false;
 var barraLateralBussy = false;
-
-// Set dinamyc height
-// -----------------------------------------------------------------------------------------
-// #REGION DECLARACIONES GLOBALES
-var playpause = document.getElementById("playpause");
-
-var temas = [{
-    name: "Botana Parrillera Sabatina",
-    url: "videos/botana.mp4"
-}, {
-    name: "Segundo video de la lista",
-    url: "videos/botana.mp4"
-},
-{
-    name: "Tercer video de la lista",
-    url: "videos/botana.mp4"
-},
-{
-    name: "cuarto video de la lista",
-    url: "videos/botana.mp4"
-}];
+var Rutas = new Array();
+var TRAK = new Array();
+var debug = false;
+var video = document.getElementById("video");
 // #REGION FIN DECLARACIONES GLOBALES
 // -----------------------------------------------------------------------------------------
-// var video = $("#video");
-var video = document.getElementById("video");
-// Grab a handle to the video
-// Turn off the default controls
 this.video.controls = false;
 $("#playpause").click(function () {
-    // var playpause = document.getElementById("playpause");
-
     if (video.paused || video.ended) {
         // playpause.innerHTML = "pause_circle_outline";
         $("#playpause").removeClass("fa-play-circle").addClass("fa-pause-circle");
@@ -40,10 +20,26 @@ $("#playpause").click(function () {
     }
     else {
         $("#playpause").removeClass("fa-pause-circle").addClass("fa-play-circle");
-        // playpause.innerHTML = "play_circle_outline"; pause-circle
         video.pause();
     }
 });
+
+function initialize_track() {
+    if (localStorage.getItem(NombreCurso).Trak.length <= 0) {
+        let suma = 0;
+        for (let i = 0; i < datos.Modulos.length; i++) {
+            for (let j = 0; j < datos.Modulos[i]["Temas"].length; j++) {
+                suma++
+            }
+        }
+        for (let t = 0; t < suma; t++) {
+            TRAK[t] = "0";
+        }
+    }else{
+        TRAK = localStorage.getItem(NombreCurso).Trak;
+    }
+}
+
 function updateProgress() {
     let progress = $("#progress");
     let value = 0;
@@ -66,11 +62,7 @@ function progressChange(cambio) {
 function terminado() {
     $("#playpause").removeClass("fa-pause-circle").addClass("fa-play-circle");
 };
-function addListener() { video.addEventListener("timeupdate", updateProgress, false) }
-video.addEventListener("timeupdate", updateProgress, false);
-video.addEventListener("ended", terminado, false);
-
-
+function addListener() { video.addEventListener("timeupdate", updateProgress, false) } video.addEventListener("timeupdate", updateProgress, false); video.addEventListener("ended", terminado, false);
 function llamarMenu() {
     if (!bussy) {
         if (!menu_open) {
@@ -98,6 +90,7 @@ function llamarBarraLateral() {
         if (!barraLateralOpen) {
             $("#video").removeClass("col-md-12 col-lg-12 col-xl-12").addClass("col-md-9 col-lg-9 col-xl-9");
             $("#barraLateral").removeClass("oculto").addClass("barraLateral-open");
+            $("#video").css("display", "inline-block!important");
             TweenLite.from($("#barraLateral"), 0.5, { right: '-400px' });
             this.barraLateralOpen = true;
         } else {
@@ -107,7 +100,8 @@ function llamarBarraLateral() {
                 this.barraLateralOpen = false;
                 $("#barraLateral").removeClass("barraLateral-open").addClass("oculto");
                 $("#btnBarraLateral").css("pointer-events", "all");
-                TweenLite.to($("#barraLateral"), 0.01, { right: "0px" });
+                $("#video").css("display", "inline-block");
+                TweenLite.to($("#barraLateral"), 0.01, { right: "-15px" });
                 barraLateralBussy = false;
                 $("#video").removeClass("col-md-9 col-lg-9 col-xl-9").addClass("col-md-12 col-lg-12 col-xl-12");
 
@@ -115,3 +109,36 @@ function llamarBarraLateral() {
         }
     }
 }
+
+function populateMenu() {
+    // Agregar Nombre del Curso
+    // $("#menuContainer").append("<div id='menuTitle' class='col-xs-12 menuTitle'>Menú del curso </div>");
+    let consecutivo = 0;
+    for (let index = 0; index < datos.Modulos.length; index++) {
+        for (let j = 0; j < datos.Modulos[index]["Temas"].length; j++) {
+            id = consecutivo;
+            $("#temasContainer").append("<div id='" + (consecutivo + 1) + "' class='row d-flex justify-content-center temaMenu' onclick='llamarTema(" + (consecutivo+1) + ")'>"+
+            "<div class='col-1 reset' style=''>"+
+                "<a style='float: right;'>"+
+                    "<i class='fas fa-circle menuIconStyle'></i>"+
+                "</a>"+
+            "</div>"+
+            "<div class='col-10' style='color:white;margin: 0px;'>"+
+                "<p class='reset textoTema' style='float: left; padding-top: 3px; padding-left: 0px; pointer-events:none'>"+ datos.Modulos[index]["Temas"][j] + "</p>"+
+            "</div>"+
+            "</div>")
+                consecutivo++;
+                Rutas.push(datos.Modulos[index]["Rutas"][j]);
+            if (debug) {
+                console.log(jsonob.Modulos[index]['Mod' + (index + 1)][j]);
+            }
+        }// end for Temas
+    }//End Main For
+}// end PopulateMenu function
+
+function llamarTema(id){
+    let valorReal= id - 1;
+    alert("Funcionalidad no implementada. ID: "+id + " y valor real: "+valorReal)
+}// end llamarTema
+
+populateMenu();

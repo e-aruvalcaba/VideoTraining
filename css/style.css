@@ -3,6 +3,7 @@
 html {
     margin: 0%;
     padding: 0%;
+    overflow: hidden;
 }
 
 body {
@@ -20,6 +21,7 @@ body {
     margin: 0%;
     padding: 0%;
 }
+
 .barra {
     background: rgba(0, 0, 0, .75)!important;
     height: 10vh;
@@ -30,56 +32,186 @@ body {
     padding-bottom: 56px;
     float: right;
     background: rgba(0, 0, 0, .75)!important;
-    padding: 10px;
+    padding: 20px;
     color: white!important;
     /* background: rgba(0, 0, 0, .75); */
 }
+
 .controls {
     margin-left: 5px;
     font-size: 30px;
     cursor: pointer;
 }
-.aloneControl{
+
+.aloneControl {
     color: #F6CE3E;
 }
+
 #progressBar {
     border: 1px solid #aaa;
     color: #fff;
 }
+
 #progress {
     background-color: #F6CE3E;
     width: 100%;
     height: 100%;
     display: inline-block;
 }
+
 .controlsContent {
     background-color: #F6CE3E;
     border-radius: 30px;
     padding: 5px;
     /* width: 23%; */
 }
-.menu{
-    position: absolute; z-index: 2; width: 400px;   display: none;
-}
-.menu-open{
-    display: block;
-}
-.barraLateral-open{
-    display: block;
-}
-.oculto{
+
+.menu {
+    position: absolute;
+    z-index: 2;
+    width: 400px;
+    max-width: 400px;
+    max-height: 91vh;
+    transition: 0.5s, all, ease-in;
     display: none;
+}
+
+.menu-open {
+    display: block;
+}
+
+.temaMenu {
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.temaMenu:hover .textoTema {
+    /* background-color: #555; */
+    color: rgb(175, 172, 172)
+}
+
+.temaMenu:hover .menuIconStyle {
+    font-size: 9px;
+}
+
+.barraLateral-open {
+    display: block;
+}
+
+.oculto {
+    display: none;
+}
+
+.LogoBarraLateral {
+    width: 65%;
+    height: 30px;
+}
+
+.barraLateralDescription{
+    padding: 0px!important;
+    font-size: 13px;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 75vh;
 }
 
 @media only screen and (max-width: 768px) {
     /* Ocultar Mensajes y subtitulos si se colapsa  */
-    .menuIconContainer{
+    .menuIconContainer {
         margin-left: 5%;
     }
-    .progressContainer{
-        margin-right: 6%;    
+    .progressContainer {
+        margin-right: 6%;
     }
-    .menu{
+    .menu {
         width: 100%;
+        max-width: 100%;
+        background: rgba(0, 0, 0, .90)!important
     }
+    .bLateralHandler{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .LogoBarraLateral {
+        width: 85%;
+    }
+}
+
+/* MENU STYLES */
+
+.menuIconStyle {
+    color: white;
+    font-size: 6px;
+    pointer-events: none;
+}
+
+.temasContainer {
+    padding: 0px!important;
+    overflow-y: auto;
+    max-height: 75vh;
+    overflow-x: hidden;
+}
+
+/* SCROLL PERSONALIZADO */
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 30px!important;
+    padding-right: 150px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: rgb(5, 12, 19);
+    margin: 30px 0;
+    border-radius: 20px;
+    margin-right: 30px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: rgb(192, 186, 186);
+    border-radius: 20px;
+    height: 50px!important;
+    margin: 50px 0;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/*  SCROLLBAR PARA INTERNET EXPLORER */
+
+::-ms-scrollbar {
+    width: 8px;
+    height: 0px;
+}
+
+/* Track */
+
+::-ms-scrollbar-track {
+    background: #f1f1f1;
+    padding-top: 15px!important;
+    padding-bottom: 15px!important;
+}
+
+/* Handle */
+
+::-ms-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+
+::-ms-scrollbar-thumb:hover {
+    background: #555;
 }
