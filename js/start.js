@@ -1,4 +1,5 @@
-var datos = $.parseJSON('{"Modulos":[{"Num":1,"Nombre":"Nombre de Modulo 1","Temas":["Tema 1","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3","Tema 2","Tema 3"],"Rutas":["video/video1","video/video2","video/video3"]},{"Num":2,"Nombre":"Nombre de Modulo 2","Temas":["Tema 4","Tema 5","Tema 6"],"Rutas":["video/video4","video/video5","video/video6"]},{"Num":3,"Nombre":"Nombre de Modulo 3","Temas":["Tema 7","Tema 8","Tema 9"],"Rutas":["video/video7","video/video8","video/video9"]}],"NombreCurso":"Video Training Development","Trak":[],"Ultimo":0,"Libre":false}');
+// INICIAN DECLARACIONES GLOBALES -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+var datos = $.parseJSON('{"Modulos":[{"Num":1,"Nombre":"Nombre de Modulo 1","Temas":["Tema 1","Tema 2","Tema 3"],"Rutas":["video/video1","video/video2","video/video3"]},{"Num":2,"Nombre":"Nombre de Modulo 2","Temas":["Tema 4","Tema 5","Tema 6"],"Rutas":["video/video4","video/video5","video/video6"]},{"Num":3,"Nombre":"Nombre de Modulo 3","Temas":["Tema 7","Tema 8","Tema 9"],"Rutas":["video/video7","video/video8","video/video9"]}],"NombreCurso":"Video Training Development","Trak":[],"Ultimo":0,"Libre":false}');
 var playpause = document.getElementById("playpause");
 var menu_open = false;
 var NombreCurso = datos.NombreCurso;
@@ -9,12 +10,13 @@ var Rutas = new Array();
 var TRAK = new Array();
 var debug = false;
 var video = document.getElementById("video");
-// #REGION FIN DECLARACIONES GLOBALES
-// -----------------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 this.video.controls = false;
+
 $("#playpause").click(function () {
     if (video.paused || video.ended) {
-        // playpause.innerHTML = "pause_circle_outline";
         $("#playpause").removeClass("fa-play-circle").addClass("fa-pause-circle");
         video.play();
     }
@@ -81,7 +83,7 @@ function llamarMenu() {
             }, 500);
         }
     }
-    // actualizar_menuHTML(TRAK); // actualizar el menu
+    // actualizar_menuHTML(TRAK); // actualizar el menu0
     // limpiarSim(); // se limpia la 
 }
 
@@ -111,8 +113,6 @@ function llamarBarraLateral() {
 }
 
 function populateMenu() {
-    // Agregar Nombre del Curso
-    // $("#menuContainer").append("<div id='menuTitle' class='col-xs-12 menuTitle'>Menú del curso </div>");
     let consecutivo = 0;
     for (let index = 0; index < datos.Modulos.length; index++) {
         for (let j = 0; j < datos.Modulos[index]["Temas"].length; j++) {
@@ -142,3 +142,24 @@ function llamarTema(id){
 }// end llamarTema
 
 populateMenu();
+
+window.onresize = function(){
+    // Ajustar dinamicamente el video con respecto a la barra inferior
+    $("#video").css("padding-bottom", ($("#barraInferior").height() + 60).toString()+"px");
+}
+
+
+
+
+
+// INICIALIZACION DEL CURSO --------------------------------------------------------------------------------------------------------------------------------------------
+$("#document").ready(function (){
+    setTimeout(inicializar, 2000);
+});
+
+function inicializar(){
+    // Ocultar loader
+    $("#loader-wrappler").remove();
+    // Settear padding inicial para el video
+    $("#video").css("padding-bottom", ($("#barraInferior").height() + 60).toString()+"px");    
+}
